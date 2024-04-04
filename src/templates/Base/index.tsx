@@ -5,5 +5,5 @@ type BaseProps = {
 }
 
 export const Base = ({ children }: BaseProps) => {
-  return <div>{children}</div>
+  return <div className="text-3xl font-bold underline">{children}</div>
 }
