@@ -1,0 +1,44 @@
+{
+  "name": "nextjs-boilerplate",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:local": "yarn install && yarn lint:fix && yarn build && yarn start",
+    "start": "next start",
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
+    "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}"
+  },
+  "dependencies": {
+    "@react-spring/web": "^9.7.3",
+    "axios": "^1.6.0",
+    "html-react-parser": "^5.0.4",
+    "next": "14.0.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "sharp": "^0.32.6",
+    "styled-components": "^6.1.0",
+    "styled-media-query": "^2.1.2",
+    "swiper": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^20",
+    "@types/prettier": "^3.0.0",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/styled-components": "^5.1.29",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "babel-plugin-styled-components": "^2.1.4",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.1",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "4",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
+    "typescript": "^5"
+  }
+}
