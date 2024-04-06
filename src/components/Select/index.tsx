@@ -16,7 +16,7 @@ export const Select = ({
     <label className="flex flex-col items-start justify-center gap-2 w-full">
       <h3>{label}</h3>
       <select
-        className="w-full bg-slate-200 appearance-none text-lg border-1 border-slate-100 px-2 py-2"
+        className="w-full bg-slate-200 appearance-none text-lg border-1 border-slate-100 px-2 py-2 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-sm required"
         {...rest}
       >
         <option value={''} disabled>
