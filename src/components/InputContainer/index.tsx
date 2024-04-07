@@ -15,7 +15,7 @@ export const InputContainer = ({
       className="flex flex-col items-start justify-center gap-2 w-full"
       {...rest}
     >
-      <h3>{label}</h3>
+      <h3 className="font-normal text-xl">{label}</h3>
       {children}
     </label>
   )
