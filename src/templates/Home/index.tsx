@@ -1,8 +1,9 @@
-import { Select } from '@/components/Select'
-import { Base } from '../Base'
-import { useState } from 'react'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import { Select } from '@/components/Select'
+import { useState } from 'react'
+import { Base } from '../Base'
+import { Holerite } from '@/components/Holerite'
 
 interface IConfig {
   empresaId: string
@@ -30,7 +31,7 @@ export const HomeTemplate = () => {
   return (
     <Base>
       <section className="w-1/3 flex flex-col items-start justify-center gap-8">
-        <h1 className="text-5xl font-black text-green-600">Holerite</h1>
+        {/* <h1 className="text-5xl font-black text-green-600">Holerite</h1> */}
         <form
           className="w-full flex flex-col items-start justify-center gap-8 bg-white rounded-xl shadow-lg px-4 py-4"
           action=""
@@ -79,13 +80,58 @@ export const HomeTemplate = () => {
                 })
               }}
             />
+
+            <Input
+              label="Horas Extras em fins de semana"
+              defaultValue={config.horarios.horasExtrasFimDeSemana}
+              onChange={(e) => {
+                setConfig({
+                  ...config,
+                  horarios: {
+                    ...config.horarios,
+                    horasExtrasFimDeSemana: parseInt(e.target.value)
+                  }
+                })
+              }}
+            />
+
+            <Input
+              label="Horas em débito"
+              defaultValue={config.horarios.horasEmDebito}
+              onChange={(e) => {
+                setConfig({
+                  ...config,
+                  horarios: {
+                    ...config.horarios,
+                    horasEmDebito: parseInt(e.target.value)
+                  }
+                })
+              }}
+            />
+
+            <Input
+              label="Horas de adicional noturno"
+              defaultValue={config.horarios.horasAdicionalNoturno}
+              onChange={(e) => {
+                setConfig({
+                  ...config,
+                  horarios: {
+                    ...config.horarios,
+                    horasAdicionalNoturno: parseInt(e.target.value)
+                  }
+                })
+              }}
+            />
           </div>
 
           <Button title="Exibir holerite" />
         </form>
       </section>
-      <section className="w-2/3 flex flex-col items-start justify-center">
-        <span>O Holetrite do funcionário será exibido aqui</span>
+      <section className="w-2/3 h-full flex flex-col items-center justify-center">
+        <span className="text-slate-400">
+          O Holetrite do funcionário será exibido aqui
+        </span>
+        <Holerite />
       </section>
     </Base>
   )
