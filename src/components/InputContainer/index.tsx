@@ -12,10 +12,10 @@ export const InputContainer = ({
 }: InputContainerProps) => {
   return (
     <label
-      className="flex flex-col items-start justify-center gap-2 w-full"
+      className="flex flex-col items-start justify-center gap-1 w-full"
       {...rest}
     >
-      <h3 className="font-normal text-xl">{label}</h3>
+      <h4 className="font-normal">{label}</h4>
       {children}
     </label>
   )
