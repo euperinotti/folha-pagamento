@@ -30,8 +30,8 @@ export const HomeTemplate = () => {
 
   return (
     <Base>
-      <section className="w-1/3 flex flex-col items-start justify-center gap-8">
-        {/* <h1 className="text-5xl font-black text-green-600">Holerite</h1> */}
+      <section className="w-1/3 flex flex-col items-start justify-center gap-4">
+        <h1 className="text-5xl font-black text-green-600">Holerite</h1>
         <form
           className="w-full flex flex-col items-start justify-center gap-8 bg-white rounded-xl shadow-lg px-4 py-4"
           action=""
