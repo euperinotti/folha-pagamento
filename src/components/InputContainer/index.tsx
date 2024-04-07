@@ -1,4 +1,4 @@
-import React, { LabelHTMLAttributes, ReactNode } from 'react'
+import { LabelHTMLAttributes, ReactNode } from 'react'
 
 interface InputContainerProps extends LabelHTMLAttributes<HTMLLabelElement> {
   label: string

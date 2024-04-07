@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface BoxProps {
   title: string
   value: string
