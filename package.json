@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-boilerplate",
+  "name": "folha-pagamento",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,7 @@
     "build:local": "yarn install && yarn lint:fix && yarn build && yarn start",
     "start": "next start",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
-    "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}"
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'"
   },
   "dependencies": {
     "@react-spring/web": "^9.7.3",
