@@ -19,16 +19,21 @@ export const Select = ({
         className="w-full px-3 py-2 border-slate-200 border-2 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 rounded-md text-base appearance-none required"
         {...rest}
       >
-        <option value={''} disabled>
+        <option
+          value={''}
+          className="text-slate-400 disabled:text-slate-400 invalid:text-red-500"
+          disabled
+        >
           {placeholder}
         </option>
-        {options.map((option, key) => {
-          return (
-            <option key={key} value={option.value}>
-              {option.name}
-            </option>
-          )
-        })}
+        {options.length > 0 &&
+          options.map((option, key) => {
+            return (
+              <option key={key} value={option.id}>
+                {option.nome}
+              </option>
+            )
+          })}
       </select>
     </label>
   )

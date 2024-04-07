@@ -1,9 +1,10 @@
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Select } from '@/components/Select'
-import { useState } from 'react'
+import { FormEvent, useMemo, useState } from 'react'
 import { Base } from '../Base'
 import { Holerite } from '@/components/Holerite'
+import { useMocks } from '@/hooks/useMocks'
 
 interface IConfig {
   empresaId: string
@@ -27,19 +28,31 @@ export const HomeTemplate = () => {
       horasEmDebito: 0
     }
   })
+  const [response, setResponse] = useState(false)
+
+  const _mocks = useMocks()
+
+  useMemo(() => {}, [config.empresaId])
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+
+    console.log(config)
+    setResponse(true)
+  }
 
   return (
     <Base>
       <section className="w-1/3 flex flex-col items-start justify-center gap-4">
-        <h1 className="text-5xl font-black text-green-600">Holerite</h1>
         <form
-          className="w-full flex flex-col items-start justify-center gap-8 bg-white rounded-xl shadow-lg px-4 py-4"
-          action=""
+          className="w-full flex flex-col items-start justify-center gap-4 bg-white rounded-xl shadow-lg px-4 py-4"
+          onSubmit={handleSubmit}
         >
+          <h1 className="text-5xl font-black text-green-600">Holerite</h1>
           <div className="w-full flex flex-col items-start justify-center container gap-3">
             <Select
               label="Empresa"
-              options={[{ name: 'Empresa 1', value: '100' }]}
+              options={_mocks.getEmpresasMock()}
               defaultValue={config.empresaId}
               onChange={(e) => {
                 setConfig({
@@ -52,7 +65,7 @@ export const HomeTemplate = () => {
             />
             <Select
               label="Funcionário"
-              options={[{ name: 'Funcionário 1', value: '100' }]}
+              options={_mocks.getEmpregadosByEmpresaId(config.empresaId)!}
               defaultValue={config.funcionarioId}
               onChange={(e) => {
                 setConfig({
@@ -65,7 +78,7 @@ export const HomeTemplate = () => {
             />
           </div>
 
-          <div className="container w-full flex flex-col items-start justify-center gap-3">
+          <div className="container w-full flex flex-col items-start justify-center gap-2">
             <h2>Ponto</h2>
             <Input
               label="Horas Extras"
@@ -128,10 +141,13 @@ export const HomeTemplate = () => {
         </form>
       </section>
       <section className="w-2/3 h-full flex flex-col items-center justify-center">
-        <span className="text-slate-400">
-          O Holetrite do funcionário será exibido aqui
-        </span>
-        <Holerite />
+        {!response ? (
+          <span className="text-slate-400">
+            O Holetrite do funcionário será exibido aqui
+          </span>
+        ) : (
+          <Holerite />
+        )}
       </section>
     </Base>
   )
