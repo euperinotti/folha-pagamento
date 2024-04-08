@@ -43,7 +43,7 @@ export const HomeTemplate = () => {
 
   return (
     <Base>
-      <section className="w-1/3 flex flex-col items-start justify-center gap-4">
+      <section className="w-1/3 flex flex-col items-start justify-center gap-4 max-w-[1200px]">
         <form
           className="w-full flex flex-col items-start justify-center gap-4 bg-white rounded-xl shadow-lg px-4 py-4"
           onSubmit={handleSubmit}

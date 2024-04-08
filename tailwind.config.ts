@@ -7,8 +7,11 @@ module.exports = {
     extend: {
       fontFamily: {
         primary: ['Inter', ...defaultTheme.fontFamily.sans]
+      },
+      aspectRatio: {
+        '16/10': '16 / 10'
       }
     }
   },
   plugins: []
-}
+} as Config
