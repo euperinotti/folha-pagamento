@@ -1,44 +1,37 @@
+import api from '@/axios/axios-provider'
+import { IHoleriteRequest } from '@/axios/types/IHoleriteRequest'
 import { Button } from '@/components/Button'
+import { Holerite } from '@/components/Holerite'
 import { Input } from '@/components/Input'
 import { Select } from '@/components/Select'
-import { FormEvent, useMemo, useState } from 'react'
+import { useEmpresas } from '@/hooks/useEmpresas'
+import { FormEvent, useState } from 'react'
 import { Base } from '../Base'
-import { Holerite } from '@/components/Holerite'
-import { useMocks } from '@/hooks/useMocks'
 
-interface IConfig {
-  empresaId: string
-  funcionarioId: string
-  horarios: {
-    horasExtras: number
-    horasExtrasFimDeSemana: number
-    horasAdicionalNoturno: number
-    horasEmDebito: number
-  }
+interface HomeProps {
+  data: any[]
 }
 
-export const HomeTemplate = () => {
-  const [config, setConfig] = useState<IConfig>({
-    empresaId: '',
-    funcionarioId: '',
-    horarios: {
+export const HomeTemplate = ({ data }: HomeProps) => {
+  const [config, setConfig] = useState<IHoleriteRequest>({
+    cnpj: '',
+    cpf: '',
+    horario: {
       horasExtras: 0,
       horasExtrasFimDeSemana: 0,
       horasAdicionalNoturno: 0,
-      horasEmDebito: 0
+      horasEmDeficit: 0
     }
   })
   const [response, setResponse] = useState(false)
 
-  const _mocks = useMocks()
+  const empresas = useEmpresas(data)
 
-  useMemo(() => {}, [config.empresaId])
-
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
-    console.log(config)
-    setResponse(true)
+    const response = await api.createHolerite(config)
+    setResponse(response)
   }
 
   return (
@@ -52,12 +45,12 @@ export const HomeTemplate = () => {
           <div className="w-full flex flex-col items-start justify-center container gap-3">
             <Select
               label="Empresa"
-              options={_mocks.getEmpresasMock()}
-              defaultValue={config.empresaId}
+              options={data}
+              defaultValue={config.cnpj}
               onChange={(e) => {
                 setConfig({
                   ...config,
-                  empresaId: e.target.value
+                  cnpj: e.target.value
                 })
               }}
               placeholder="Escolha uma empresa"
@@ -65,12 +58,12 @@ export const HomeTemplate = () => {
             />
             <Select
               label="Funcionário"
-              options={_mocks.getEmpregadosByEmpresaId(config.empresaId)!}
-              defaultValue={config.funcionarioId}
+              options={empresas.getEmpregadosByEmpresaId(config.cnpj)!}
+              defaultValue={config.cpf}
               onChange={(e) => {
                 setConfig({
                   ...config,
-                  funcionarioId: e.target.value
+                  cpf: e.target.value
                 })
               }}
               placeholder="Escolha um funcionário desta empresa"
@@ -79,15 +72,20 @@ export const HomeTemplate = () => {
           </div>
 
           <div className="container w-full flex flex-col items-start justify-center gap-2">
-            <h2>Ponto</h2>
+            <div className="w-full flex flex-col">
+              <h2>Ponto</h2>
+              <span className="text-slate-500 text-sm">
+                Defina o valor mensal das horas abaixo
+              </span>
+            </div>
             <Input
               label="Horas Extras"
-              defaultValue={config.horarios.horasExtras}
+              defaultValue={config.horario.horasExtras}
               onChange={(e) => {
                 setConfig({
                   ...config,
-                  horarios: {
-                    ...config.horarios,
+                  horario: {
+                    ...config.horario,
                     horasExtras: parseInt(e.target.value)
                   }
                 })
@@ -96,12 +94,12 @@ export const HomeTemplate = () => {
 
             <Input
               label="Horas Extras em fins de semana"
-              defaultValue={config.horarios.horasExtrasFimDeSemana}
+              defaultValue={config.horario.horasExtrasFimDeSemana}
               onChange={(e) => {
                 setConfig({
                   ...config,
-                  horarios: {
-                    ...config.horarios,
+                  horario: {
+                    ...config.horario,
                     horasExtrasFimDeSemana: parseInt(e.target.value)
                   }
                 })
@@ -110,13 +108,13 @@ export const HomeTemplate = () => {
 
             <Input
               label="Horas em débito"
-              defaultValue={config.horarios.horasEmDebito}
+              defaultValue={config.horario.horasEmDeficit}
               onChange={(e) => {
                 setConfig({
                   ...config,
-                  horarios: {
-                    ...config.horarios,
-                    horasEmDebito: parseInt(e.target.value)
+                  horario: {
+                    ...config.horario,
+                    horasEmDeficit: parseInt(e.target.value)
                   }
                 })
               }}
@@ -124,12 +122,12 @@ export const HomeTemplate = () => {
 
             <Input
               label="Horas de adicional noturno"
-              defaultValue={config.horarios.horasAdicionalNoturno}
+              defaultValue={config.horario.horasAdicionalNoturno}
               onChange={(e) => {
                 setConfig({
                   ...config,
-                  horarios: {
-                    ...config.horarios,
+                  horario: {
+                    ...config.horario,
                     horasAdicionalNoturno: parseInt(e.target.value)
                   }
                 })
@@ -146,7 +144,7 @@ export const HomeTemplate = () => {
             O Holetrite do funcionário será exibido aqui
           </span>
         ) : (
-          <Holerite />
+          <Holerite data={response} />
         )}
       </section>
     </Base>

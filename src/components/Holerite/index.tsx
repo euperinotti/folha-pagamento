@@ -1,6 +1,10 @@
 import { Box } from './Box'
 
-export const Holerite = () => {
+interface HoleriteProps {
+  data: any
+}
+
+export const Holerite = ({ data }: HoleriteProps) => {
   return (
     <div className="bg-white aspect-16/10 w-full max-h-[800px] h-full flex flex-col items-center justify-start px-2 py-2 gap-2 shadow-lg">
       <div
@@ -9,7 +13,7 @@ export const Holerite = () => {
       >
         <div className="w-full flex items-center justify-between border-slate-950 border-[1px] px-2">
           <div className="container">
-            <h4>Empresa Ficticia LTDA</h4>
+            <h4>{data.empresa.nome}</h4>
             <span>CNPJ: 00.000.000/0001-00</span>
           </div>
 
