@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 export default function Home() {
   const [homeData, setHomeData] = useState([])
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     async function fetchData() {
@@ -11,11 +12,21 @@ export default function Home() {
 
       setHomeData(empresas)
     }
-
-    fetchData()
+    try {
+      fetchData()
+    } catch (error) {
+      console.error(error)
+      setError(true)
+    }
   }, [])
 
   return (
-    <>{homeData && homeData.length > 0 && <HomeTemplate data={homeData} />}</>
+    <>
+      {!error && homeData && homeData.length > 0 ? (
+        <HomeTemplate data={homeData} />
+      ) : (
+        <h1>Ocorreu um erro :(</h1>
+      )}
+    </>
   )
 }

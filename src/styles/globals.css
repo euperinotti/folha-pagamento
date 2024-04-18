@@ -28,6 +28,10 @@
   --color-primary-900: rgb(var(--tw-color-primary-900));
 }
 
+nextjs-portal {
+  display: none;
+}
+
 html {
   scroll-behavior: smooth;
 }
