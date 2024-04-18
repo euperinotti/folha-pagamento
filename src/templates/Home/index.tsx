@@ -4,8 +4,7 @@ import { Button } from '@/components/Button'
 import { Holerite } from '@/components/Holerite'
 import { Input } from '@/components/Input'
 import { Select } from '@/components/Select'
-import { useEmpresas } from '@/hooks/useEmpresas'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Base } from '../Base'
 
 interface HomeProps {
@@ -23,12 +22,21 @@ export const HomeTemplate = ({ data }: HomeProps) => {
       horasEmDeficit: 0
     }
   })
-  const [response, setResponse] = useState(false)
+  const [response, setResponse] = useState(undefined)
+  const [empresas] = useState(data)
+  const [empregados, setEmpregados] = useState([])
 
-  const empresas = useEmpresas(data)
+  useEffect(() => {
+    if (config.cnpj != '') {
+      const filtered = empresas.find((empresa) => empresa.cnpj == config.cnpj)
+      setEmpregados(filtered.empregados)
+      console.log(empregados)
+    }
+  }, [config.cnpj])
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    setResponse(undefined)
 
     const response = await api.createHolerite(config)
     setResponse(response)
@@ -46,6 +54,8 @@ export const HomeTemplate = ({ data }: HomeProps) => {
             <Select
               label="Empresa"
               options={data}
+              fieldId="cnpj"
+              fieldText="razaoSocial"
               defaultValue={config.cnpj}
               onChange={(e) => {
                 setConfig({
@@ -58,7 +68,9 @@ export const HomeTemplate = ({ data }: HomeProps) => {
             />
             <Select
               label="Funcionário"
-              options={empresas.getEmpregadosByEmpresaId(config.cnpj)!}
+              options={empregados}
+              fieldId="cpf"
+              fieldText="nome"
               defaultValue={config.cpf}
               onChange={(e) => {
                 setConfig({

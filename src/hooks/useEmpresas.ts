@@ -9,11 +9,12 @@ export const useEmpresas = (responseEmpresas: any[]) => {
 
   const getEmpregadosByEmpresaId = (empresaId: string) => {
     return empresaId != ''
-      ? empresas.find((empresa) => empresa.id === empresaId)?.empregados
+      ? empresas.find((empresa) => empresa.cnpj == empresaId)?.empregados
       : []
   }
 
   return {
+    data: empresas,
     getEmpresas,
     getEmpregadosByEmpresaId
   }

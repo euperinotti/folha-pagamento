@@ -8,6 +8,7 @@ const axiosConfig = axios.create({
 
 axiosConfig.interceptors.request.use(
   (config: InternalAxiosRequestConfig<any>) => {
+    config.headers['Content-Type'] = 'application/json'
     return config
   },
   (error) => {

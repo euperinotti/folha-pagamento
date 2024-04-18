@@ -4,12 +4,16 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string
   options: any[]
   placeholder: string
+  fieldId: string
+  fieldText: string
 }
 
 export const Select = ({
   label,
   options,
   placeholder,
+  fieldId,
+  fieldText,
   ...rest
 }: SelectProps) => {
   return (
@@ -29,8 +33,8 @@ export const Select = ({
         {options.length > 0 &&
           options.map((option, key) => {
             return (
-              <option key={key} value={option.id}>
-                {option.nome}
+              <option key={key} value={option[fieldId]}>
+                {option[fieldText]}
               </option>
             )
           })}

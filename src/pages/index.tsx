@@ -3,7 +3,7 @@ import { HomeTemplate } from '@/templates/Home'
 import { useEffect, useState } from 'react'
 
 export default function Home() {
-  const [homeData, setHomeData] = useState<any[]>([])
+  const [homeData, setHomeData] = useState([])
 
   useEffect(() => {
     async function fetchData() {
@@ -15,5 +15,7 @@ export default function Home() {
     fetchData()
   }, [])
 
-  return <HomeTemplate data={homeData} />
+  return (
+    <>{homeData && homeData.length > 0 && <HomeTemplate data={homeData} />}</>
+  )
 }
