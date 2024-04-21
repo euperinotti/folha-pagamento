@@ -4,6 +4,7 @@ import { Button } from '@/components/Button'
 import { Holerite } from '@/components/Holerite'
 import { Input } from '@/components/Input'
 import { Select } from '@/components/Select'
+import { CardsGroup } from '@/patterns/CardsGroup'
 import { FormEvent, useEffect, useState } from 'react'
 import { Base } from '../Base'
 
@@ -150,79 +151,15 @@ export const HomeTemplate = ({ data }: HomeProps) => {
           <Button title="Exibir holerite" />
         </form>
       </section>
-      <section className="w-2/3 h-full flex flex-col items-center justify-start overflow-y-scroll no-scrollbar">
+      <section className="w-2/3 h-full flex flex-col items-center justify-center overflow-y-scroll no-scrollbar">
         {!response ? (
           <span className="text-slate-400">
             O Holetrite do funcionário será exibido aqui
           </span>
         ) : (
-          <div className="w-full">
+          <div className="w-full flex flex-col gap-6">
             <Holerite data={response} />
-
-            <div className="mt-6">
-              <h2>Empresa</h2>
-              <ul>
-                <li>Cnpj: {response.empregador.cnpj}</li>
-                <li>Razão Social: {response.empregador.razaoSocial}</li>
-                <li>Nome fantasia: {response.empregador.nomeFantasia}</li>
-                <li>Ramo de atividade: {response.empregador.ramoAtividade}</li>
-                <li>
-                  Carga horária diária: {response.empregador.cargaHorariaDiaria}
-                </li>
-                <li>Dias a trabalhar: {response.empregador.diasATrabalhar}</li>
-              </ul>
-            </div>
-
-            <div className="mt-6">
-              <h2>Funcionario</h2>
-              <ul>
-                <li>Cpf: {response.empregado.cpf}</li>
-                <li>Nome: {response.empregado.nome}</li>
-                <li>Data nascimento: {response.empregado.dataNascimento}</li>
-              </ul>
-              <h3>Dependentes</h3>
-              {response.empregado.dependentes.length > 0
-                ? response.empregado.dependentes.map(
-                    (funcionario: any, index: number) => {
-                      return (
-                        <ul key={index}>
-                          <li>Nome: {funcionario.nome}</li>
-                        </ul>
-                      )
-                    }
-                  )
-                : 'Nenhum dependente encontrado'}
-            </div>
-
-            <div className="mt-6">
-              <h2>Funcionarias com salario maternidade</h2>
-              {response.empregador.funcionariasComSalarioMaternidade.length > 0
-                ? response.empregador.funcionariasComSalarioMaternidade.map(
-                    (funcionario: any, index: number) => {
-                      return (
-                        <ul key={index}>
-                          <li>Nome: {funcionario.nome}</li>
-                        </ul>
-                      )
-                    }
-                  )
-                : 'Nenhum fucionário encontrado'}
-            </div>
-
-            <div className="mt-6">
-              <h2>Funcionarias agrupados</h2>
-              {response.empregador.funcionariosAgrupados.length > 0
-                ? response.empregador.funcionariasComSalarioMaternidade.map(
-                    (funcionario: any, index: number) => {
-                      return (
-                        <ul key={index}>
-                          <li>Nome: {funcionario.nome}</li>
-                        </ul>
-                      )
-                    }
-                  )
-                : 'Nenhum fucionário encontrado'}
-            </div>
+            <CardsGroup response={response} />
           </div>
         )}
       </section>
