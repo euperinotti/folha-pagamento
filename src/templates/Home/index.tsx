@@ -45,9 +45,9 @@ export const HomeTemplate = ({ data }: HomeProps) => {
 
   return (
     <Base>
-      <section className="w-1/3 max-h-[750px] h-full flex flex-col items-start justify-center gap-4 max-w-[1200px]">
+      <section className="w-1/3 h-full flex flex-col items-start justify-start gap-4 max-w-[1200px]">
         <form
-          className="w-full h-full flex flex-col items-start justify-start gap-4 bg-white rounded-xl shadow-lg px-4 py-4 overflow-y-scroll no-scrollbar"
+          className="w-full max-h-[730px] h-full flex flex-col items-start justify-start gap-4 bg-white rounded-xl shadow-lg px-4 py-4 overflow-y-scroll no-scrollbar"
           onSubmit={handleSubmit}
         >
           <h1 className="text-5xl font-black text-green-600">Holerite</h1>
