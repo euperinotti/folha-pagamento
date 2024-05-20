@@ -1,3 +1,4 @@
+import { StringUtils } from '@/utils/StringUtils'
 import { Box } from './Box'
 
 interface HoleriteProps {
@@ -57,8 +58,10 @@ export const Holerite = ({ data }: HoleriteProps) => {
                     key={key}
                   >
                     <td className="px-2">{provento.descricao}</td>
-                    <td className="px-2">{provento.referencia}</td>
-                    <td className="px-2">R$ {provento.vencimento}</td>
+                    <td className="px-2 text-center">{provento.referencia}</td>
+                    <td className="px-2 text-center">
+                      {StringUtils.convertToCurrency(provento.vencimento)}
+                    </td>
                     <td className="px-2"></td>
                   </tr>
                 )
@@ -72,9 +75,11 @@ export const Holerite = ({ data }: HoleriteProps) => {
                     key={key}
                   >
                     <td className="px-2">{provento.descricao}</td>
-                    <td className="px-2">{provento.referencia}</td>
+                    <td className="px-2 text-center">{provento.referencia}</td>
                     <td className="px-2"></td>
-                    <td className="px-2">R$ {provento.desconto}</td>
+                    <td className="px-2 text-center">
+                      {StringUtils.convertToCurrency(provento.desconto)}
+                    </td>
                   </tr>
                 )
               }
@@ -88,9 +93,13 @@ export const Holerite = ({ data }: HoleriteProps) => {
                       key={key}
                     >
                       <td className="px-2">{provento.descricao}</td>
-                      <td className="px-2">{provento.referencia}</td>
+                      <td className="px-2 text-center">
+                        {provento.referencia}
+                      </td>
                       <td className="px-2"></td>
-                      <td className="px-2">R$ {provento.desconto}</td>
+                      <td className="px-2 text-center">
+                        {StringUtils.convertToCurrency(provento.desconto)}
+                      </td>
                     </tr>
                   )
                 }
@@ -110,13 +119,17 @@ export const Holerite = ({ data }: HoleriteProps) => {
               <td className="border-slate-950 border-[1px] px-2">
                 <Box
                   title="Total de vencimentos"
-                  value={data.proventos.totalBeneficios}
+                  value={StringUtils.convertToCurrency(
+                    data.proventos.totalBeneficios
+                  )}
                 />
               </td>
               <td className="border-slate-950 border-[1px] px-2">
                 <Box
                   title="Total de descontos"
-                  value={data.proventos.totalDescontos}
+                  value={StringUtils.convertToCurrency(
+                    data.proventos.totalDescontos
+                  )}
                 />
               </td>
             </tr>
@@ -127,7 +140,9 @@ export const Holerite = ({ data }: HoleriteProps) => {
                 Valor Líquido
               </td>
               <td className="border-slate-950 border-[1px] px-2">
-                R$ {data.empregado.contrato.salario.liquido}
+                {StringUtils.convertToCurrency(
+                  data.empregado.contrato.salario.liquido
+                )}
               </td>
             </tr>
           </tfoot>
@@ -142,20 +157,27 @@ export const Holerite = ({ data }: HoleriteProps) => {
           <div className="text-center w-full flex justify-between gap-2">
             <Box
               title="Salário base"
-              value={'R$ ' + data.empregado.contrato.salario.bruto}
+              value={StringUtils.convertToCurrency(
+                data.empregado.contrato.salario.bruto
+              )}
             />
             <Box
               title="Salário contr. INSS"
-              value={'R$ ' + data.salarioContribuicaoInss}
+              value={StringUtils.convertToCurrency(
+                data.salarioContribuicaoInss
+              )}
             />
             <Box
               title="Base cálculo FGTS"
-              value={'R$ ' + data.baseCalculoFgts}
+              value={StringUtils.convertToCurrency(data.baseCalculoFgts)}
             />
-            <Box title="FGTS do Mês" value={'R$ ' + data.fgtsMensal} />
+            <Box
+              title="FGTS do Mês"
+              value={StringUtils.convertToCurrency(data.fgtsMensal)}
+            />
             <Box
               title="Base Cálculo IRRF"
-              value={'R$ ' + data.baseCalculoIrrf}
+              value={StringUtils.convertToCurrency(data.baseCalculoIrrf)}
             />
           </div>
         </div>

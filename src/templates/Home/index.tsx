@@ -151,7 +151,7 @@ export const HomeTemplate = ({ data }: HomeProps) => {
           <Button title="Exibir holerite" />
         </form>
       </section>
-      <section className="w-2/3 h-full flex flex-col items-center justify-center overflow-y-scroll no-scrollbar">
+      <section className="w-2/3 h-full flex flex-col items-start justify-start overflow-y-scroll no-scrollbar">
         {!response ? (
           <span className="text-slate-400">
             O Holetrite do funcionário será exibido aqui
