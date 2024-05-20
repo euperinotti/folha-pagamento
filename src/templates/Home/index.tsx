@@ -45,9 +45,9 @@ export const HomeTemplate = ({ data }: HomeProps) => {
 
   return (
     <Base>
-      <section className="w-1/3 flex flex-col items-start justify-center gap-4 max-w-[1200px]">
+      <section className="w-1/3 max-h-[750px] h-full flex flex-col items-start justify-center gap-4 max-w-[1200px]">
         <form
-          className="w-full flex flex-col items-start justify-center gap-4 bg-white rounded-xl shadow-lg px-4 py-4"
+          className="w-full h-full flex flex-col items-start justify-start gap-4 bg-white rounded-xl shadow-lg px-4 py-4 overflow-y-scroll no-scrollbar"
           onSubmit={handleSubmit}
         >
           <h1 className="text-5xl font-black text-green-600">Holerite</h1>
@@ -151,13 +151,13 @@ export const HomeTemplate = ({ data }: HomeProps) => {
           <Button title="Exibir holerite" />
         </form>
       </section>
-      <section className="w-2/3 h-full flex flex-col items-start justify-start overflow-y-scroll no-scrollbar">
+      <section className="w-2/3 max-h-[750px] h-full flex flex-col items-center justify-center">
         {!response ? (
           <span className="text-slate-400">
             O Holetrite do funcionário será exibido aqui
           </span>
         ) : (
-          <div className="w-full flex flex-col gap-6">
+          <div className="w-full h-full flex flex-col gap-6 overflow-scroll no-scrollbar">
             <Holerite data={response} />
             <CardsGroup response={response} />
           </div>

@@ -7,7 +7,7 @@ interface HoleriteProps {
 
 export const Holerite = ({ data }: HoleriteProps) => {
   return (
-    <div className="bg-white aspect-16/10 w-full max-w-[950px] max-h-[500px] h-full flex flex-col items-center justify-start px-2 py-2 gap-2 shadow-lg">
+    <div className="bg-white aspect-16/10 w-full max-w-[950px] min-h-[500px] h-auto flex flex-col items-center justify-start px-2 py-2 gap-2 shadow-lg">
       <div
         className="w-full flex flex-col items-center justify-start gap-0.5"
         id="holerite-top"
